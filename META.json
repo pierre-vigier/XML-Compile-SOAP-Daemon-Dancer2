@@ -46,6 +46,8 @@
       },
       "test" : {
          "requires" : {
+            "HTTP::Request" : "0",
+            "Plack::Test" : "0",
             "Test::More" : "0.96"
          }
       }

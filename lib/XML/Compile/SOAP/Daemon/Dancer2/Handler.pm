@@ -52,7 +52,6 @@ sub _init($)
 
 sub handle($)
 {   my ($self, $dsl) = @_;
-    $dsl->info('some tests');
 
     notice __x"WSA module loaded, but not used"
         if XML::Compile::SOAP::WSA->can('new') && !keys %{$self->{wsa_input}};

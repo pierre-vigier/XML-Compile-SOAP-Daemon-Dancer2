@@ -40,7 +40,7 @@ register 'wsdl_endpoint' => sub {
 
     my $wsdl_file = path( $wsdl_path, $options->{wsdl} );
     unless( -f $wsdl_file ) {
-        confess 'wsdl file not found';
+        confess "wsdl file not found ($wsdl_file)";
     }
 
     my $wsdl = XML::Compile::WSDL11->new( $wsdl_file  );
@@ -67,7 +67,7 @@ register 'wsdl_endpoint' => sub {
         my $implementation = get_implementation( $options->{implementation_class}, $dsl );
 
         for my $operation ( $wsdl->operations() ) {
-            $dsl->error( $operation->action );
+            #$dsl->error( $operation->action );
             if( my $call = $implementation->can("soapaction_".$operation->action) ) {
                 $operations->{$operation->action} = sub { $implementation->$call( @_ ) };
             }
