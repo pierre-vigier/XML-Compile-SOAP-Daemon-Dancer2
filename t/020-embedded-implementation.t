@@ -52,7 +52,7 @@ SOAPAction: "add"
 EOR
 
 
-my $response = $test->request( $request )->content;
+$response = $test->request( $request )->content;
 is $response, <<EOResponse, "Response is correct";
 <?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Body><tns:addResponse xmlns:tns="http://www.parasoft.com/wsdl/calculator/"><tns:Result>9</tns:Result></tns:addResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
