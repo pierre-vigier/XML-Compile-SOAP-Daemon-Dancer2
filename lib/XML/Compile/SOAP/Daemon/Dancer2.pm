@@ -11,6 +11,7 @@ use Carp;
 use XML::Compile::SOAP::Daemon::Dancer2::Handler;
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
+use XML::Compile::SOAP12;
 
 sub get_implementation {
     my ( $class_name, $dsl ) = @_;
