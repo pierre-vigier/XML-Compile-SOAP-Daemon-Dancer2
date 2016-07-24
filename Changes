@@ -2,6 +2,9 @@ Revision history for XML-Compile-SOAP-Daemon-Dancer2
 
 {{$NEXT}}
 
+0.03  2016-07-24 22:29:57 SGT
+    - Include SOAP1.2
+
 0.02  2016-05-12 23:19:09 SGT
     - first cpan release
 

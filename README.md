@@ -29,16 +29,16 @@ XML::Compile::SOAP::Daemon::Dancer2 is a plugin to add a SOAP endpoint to a Danc
 
 The plugin is Heavily inspired by XML::Compile::SOAP::Daemon::PSGI
 
-The plugin export a keyword wsdl_endpoint, that takes 2 arguments, a route path and an options hashref.
+The plugin export a keyword wsdl\_endpoint, that takes 2 arguments, a route path and an options hashref.
 
 Options available are:
-* wsdl: name of the wsdl file (under appdir/wsdl)
-* xsd: an arrayref of xsd file (under appdir/wsdl)
-* implementation_class: name of class to implement the operations
-* operations: hashref with soap operation name as key, sub as value
-* implementation_class : the class needs to do the role XML::Compile::SOAP::Daemon::Dancer2::Role::Implementation
+\* wsdl: name of the wsdl file (under appdir/wsdl)
+\* xsd: an arrayref of xsd file (under appdir/wsdl)
+\* implementation\_class: name of class to implement the operations
+\* operations: hashref with soap operation name as key, sub as value
+\* implementation\_class : the class needs to do the role XML::Compile::SOAP::Daemon::Dancer2::Role::Implementation
 
-For each operation, define a sub in the implementation class, soapaction_{operation_name}, each sub will be called with
+For each operation, define a sub in the implementation class, soapaction\_{operation\_name}, each sub will be called with
 the following parameters: $soap, $data, $dsl
 
 operations: each sub will be called with parameters: $soap, $data, $dsl

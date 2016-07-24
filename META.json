@@ -39,6 +39,7 @@
          "requires" : {
             "Dancer2" : "0",
             "XML::Compile::SOAP" : "0",
+            "XML::Compile::SOAP12" : "0",
             "XML::Compile::SOAP::Daemon" : "0",
             "XML::Compile::WSDL11" : "0",
             "perl" : "5.008005"
@@ -64,6 +65,9 @@
          "web" : "https://github.com/pierre-vigier/XML-Compile-SOAP-Daemon-Dancer2"
       }
    },
-   "version" : "0.02"
+   "version" : "0.03",
+   "x_contributors" : [
+      "Mohamad Hallal <mohamad.hallal@transfer-to.com>"
+   ]
 }
 
