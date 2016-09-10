@@ -81,7 +81,7 @@ sub handle($)
                     $version = $proto->version;
                 }
             }
-            my $action  = $dsl->request->header('SOAPAction') || '';
+            my $action  = $dsl->request->header('SOAPAction') || $dsl->request->header('Action') || $dsl->request->header('action') || '';
             $action     =~ s/["'\s]//g;   # sometimes illegal quoting and blanks "
             ($rc, $msg, my $xmlout) = $self->process($xmlin, $dsl, $action);
 

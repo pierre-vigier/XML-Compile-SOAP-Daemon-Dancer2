@@ -42,20 +42,20 @@
   </wsdl:operation>
  </wsdl:portType>
  <wsdl:binding name="ICalculator" type="tns:ICalculator">
-  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
   <wsdl:operation name="add">
-   <soap:operation soapAction="add" style="document"/>
+   <soap12:operation soapAction="add" style="document"/>
    <wsdl:input name="add0In">
-    <soap:body use="literal"/>
+    <soap12:body use="literal"/>
    </wsdl:input>
    <wsdl:output name="add0Out">
-    <soap:body use="literal"/>
+    <soap12:body use="literal"/>1
    </wsdl:output>
   </wsdl:operation>
  </wsdl:binding>
  <wsdl:service name="Calculator">
   <wsdl:port binding="tns:ICalculator" name="ICalculator">
-   <soap:address location="http://localhost/calculator"/>
+   <soap12:address location="http://localhost/calculator"/>
   </wsdl:port>
  </wsdl:service>
 </wsdl:definitions>
