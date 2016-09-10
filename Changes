@@ -1,6 +1,7 @@
 Revision history for XML-Compile-SOAP-Daemon-Dancer2
 
 {{$NEXT}}
+    - Update contributors
 
 0.04  2016-09-10 20:53:06 SGT
     - Adapt header in response according to SOAP version
