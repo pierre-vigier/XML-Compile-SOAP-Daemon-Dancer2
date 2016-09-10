@@ -47,6 +47,10 @@ operations: each sub will be called with parameters: $soap, $data, $dsl
 
 Pierre VIGIER <pierre.vigier@gmail.com>
 
+# CONTRIBUTORS
+
+Mohamad Hallal &lt;https://github.com/mohdhallal&lt;gt>
+
 # COPYRIGHT
 
 Copyright 2016- Pierre VIGIER
