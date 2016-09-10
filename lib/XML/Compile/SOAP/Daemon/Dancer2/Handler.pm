@@ -37,19 +37,7 @@ sub _init($)
 }
 
 
-# PSGI request handler
-#will be called from the route
-#sub call($)
-#{   my ($self, $env) = @_;
-    #my $res = eval { $self->_call($env) };
-    #$res ||= Plack::Response->new
-      #( RC_SERVER_ERROR
-      #, [Content_Type => 'text/plain']
-      #, [$@]
-      #);
-    #$res->finalize;
-#}
-
+my $parser        = XML::LibXML->new;
 sub handle($)
 {   my ($self, $dsl) = @_;
 
@@ -75,20 +63,41 @@ sub handle($)
     }
     else
     {   my $charset = $dsl->request->headers->content_type_charset || 'ascii';
-        my $xmlin   = decode $charset, $dsl->request->content;
-        my $action  = $dsl->request->header('SOAPAction') || '';
-        $action     =~ s/["'\s]//g;   # sometimes illegal quoting and blanks "
-        ($rc, $msg, my $xmlout) = $self->process(\$xmlin, $dsl, $action);
-        #($rc, $msg, my $xmlout) = (RC_OK, 'blab', XML::LibXML::Document->createDocument() );
-        #($rc, $msg, my $xmlout) = (RC_OK, 'blab', 'pppp' );
+        my $xmlin   = try { $parser->parse_string( decode( $charset, $dsl->request->content ) ); };
 
-        if(UNIVERSAL::isa($xmlout, 'XML::LibXML::Document'))
-        {   $content = $xmlout->toString($rc == RC_OK ? 0 : 1);
-            $mime  = 'text/xml; charset="utf-8"';
-        }
-        else
-        {
-            $err   = $xmlout;
+        if( $@ ) {
+            ($rc, $msg, $err) = $self->faultInvalidXML($@->died);
+        } else {
+            my $version = undef;
+            $xmlin= $xmlin->documentElement
+                if $xmlin->isa('XML::LibXML::Document');
+
+            my $local  = $xmlin->localName;
+
+            if( $local eq 'Envelope' ) {
+                my $envns  = $xmlin->namespaceURI || '';
+                my $proto  = XML::Compile::SOAP->fromEnvelope($envns);
+                if( $proto ) {
+                    $version = $proto->version;
+                }
+            }
+            my $action  = $dsl->request->header('SOAPAction') || $dsl->request->header('Action') || $dsl->request->header('action') || '';
+            $action     =~ s/["'\s]//g;   # sometimes illegal quoting and blanks "
+            ($rc, $msg, my $xmlout) = $self->process($xmlin, $dsl, $action);
+
+            if(UNIVERSAL::isa($xmlout, 'XML::LibXML::Document'))
+            {
+                $content = $xmlout->toString($rc == RC_OK ? 0 : 1);
+                if( $version eq "SOAP11" ) {
+                    $mime  = 'text/xml; charset="utf-8"';
+                } else {
+                    $mime  = "application/soap+xml; charset=utf-8";
+                }
+            }
+            else
+            {
+                $err   = $xmlout;
+            }
         }
     }
 
@@ -102,34 +111,5 @@ sub handle($)
     #$dsl->content_length(length $bytes);
     return $content;
 }
-
-#manage from the route itself
-#sub setWsdlResponse($;$)
-#{   my ($self, $fn, $ft) = @_;
-    #local *WSDL;
-    #open WSDL, '<:raw', $fn
-        #or fault __x"cannot read WSDL from {file}", file => $fn;
-    #local $/;
-    #$self->{wsdl_data} = <WSDL>;
-    #$self->{wsdl_type} = $ft || 'application/wsdl+xml';
-    #close WSDL;
-#}
-
-#sub sendWsdl($)
-#{   my ($self, $req) = @_;
-
-    #my $res = $req->new_response(RC_OK,
-      #{ Warning        => '199 WSDL specification'
-      #, Content_Type   => $self->{wsdl_type}.'; charset=utf-8'
-      #, Content_Length => length($self->{wsdl_data})
-      #}, $self->{wsdl_data});
-
-    #$res;
-#}
-
-#-----------------------------
-
-1;
-
 
 1;
