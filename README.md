@@ -49,7 +49,7 @@ Pierre VIGIER <pierre.vigier@gmail.com>
 
 # CONTRIBUTORS
 
-Mohamad Hallal &lt;https://github.com/mohdhallal&lt;gt>
+Mohamad Hallal [https://github.com/mohdhallal](https://github.com/mohdhallal)
 
 # COPYRIGHT
 

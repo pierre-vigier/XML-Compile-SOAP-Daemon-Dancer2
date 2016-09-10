@@ -1,6 +1,7 @@
 Revision history for XML-Compile-SOAP-Daemon-Dancer2
 
 {{$NEXT}}
+    - Fix pod formatting
 
 0.05  2016-09-10 20:59:30 SGT
     - Update contributors

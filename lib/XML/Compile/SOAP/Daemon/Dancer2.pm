@@ -161,7 +161,7 @@ Pierre VIGIER E<lt>pierre.vigier@gmail.comE<gt>
 
 =head1 CONTRIBUTORS
 
-Mohamad Hallal E<lt>https://github.com/mohdhallal<gt>
+Mohamad Hallal L<https://github.com/mohdhallal>
 
 =head1 COPYRIGHT
 
