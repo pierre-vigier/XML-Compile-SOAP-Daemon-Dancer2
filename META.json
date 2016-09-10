@@ -65,7 +65,7 @@
          "web" : "https://github.com/pierre-vigier/XML-Compile-SOAP-Daemon-Dancer2"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_contributors" : [
       "Mohamad Hallal <mohamad.hallal@transfer-to.com>"
    ]
