@@ -2,6 +2,9 @@ Revision history for XML-Compile-SOAP-Daemon-Dancer2
 
 {{$NEXT}}
 
+0.07  2017-03-03 15:29:07 SGT
+    - Fix warning due to deprecated keyword
+
 0.06  2016-09-10 21:07:41 SGT
     - Fix pod formatting
 

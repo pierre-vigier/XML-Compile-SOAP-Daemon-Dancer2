@@ -2,7 +2,7 @@ package XML::Compile::SOAP::Daemon::Dancer2;
 use strict;
 use warnings;
 use 5.008_005;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 use Dancer2::Plugin;
 use Dancer2::FileUtils 'path';
 use Class::Load qw(try_load_class);
