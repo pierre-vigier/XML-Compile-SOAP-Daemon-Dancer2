@@ -48,8 +48,8 @@ sub handle($)
     #return $self->sendWsdl($req)
         #if $req->method eq 'GET' && uc($req->uri->query || '') eq 'WSDL';
 
-    my $method = $dsl->request->method;
-    my $ct     = $dsl->request->content_type || 'text/plain';
+    my $method = $dsl->app->request->method;
+    my $ct     = $dsl->app->request->content_type || 'text/plain';
     $ct =~ s/\;\s.*//;
 
     my ($rc, $msg, $err, $content, $mime);
@@ -62,8 +62,8 @@ sub handle($)
         $err = 'content-type seems to be '.$ct.', must be some XML';
     }
     else
-    {   my $charset = $dsl->request->headers->content_type_charset || 'ascii';
-        my $xmlin   = try { $parser->parse_string( decode( $charset, $dsl->request->content ) ); };
+    {   my $charset = $dsl->app->request->headers->content_type_charset || 'ascii';
+        my $xmlin   = try { $parser->parse_string( decode( $charset, $dsl->app->request->content ) ); };
 
         if( $@ ) {
             ($rc, $msg, $err) = $self->faultInvalidXML($@->died);
@@ -81,7 +81,7 @@ sub handle($)
                     $version = $proto->version;
                 }
             }
-            my $action  = $dsl->request->header('SOAPAction') || $dsl->request->header('Action') || $dsl->request->header('action') || '';
+            my $action  = $dsl->app->request->header('SOAPAction') || $dsl->app->request->header('Action') || $dsl->app->request->header('action') || '';
             $action     =~ s/["'\s]//g;   # sometimes illegal quoting and blanks "
             ($rc, $msg, my $xmlout) = $self->process($xmlin, $dsl, $action);
 
